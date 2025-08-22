@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sister!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f5c3e6, #b19cd9, #87ceeb);
+            color: #333;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            margin: 20px 0;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(to right, #e91e63, #9c27b0);
+            color: white;
+            position: relative;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .birthday-girl {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        .message-container {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .interactive-section {
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #e91e63, #9c27b0);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gallery {
+            display: flex;
+            overflow-x: auto;
+            padding: 15px 0;
+            gap: 10px;
+            scroll-snap-type: x mandatory;
+            margin: 15px 0;
+        }
+        
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .wish-form {
+            margin-top: 20px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 15px;
+            resize: none;
+            height: 100px;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0.8;
+            border-radius: 0;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        }
+        
+        .heart {
+            color: #e91e63;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .modal-content img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-image {
+                height: 200px;
+            }
+            
+            .message {
+                font-size: 1rem;
+            }
+            
+            .gallery-item {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Happy Birthday!</h1>
+            <div class="birthday-girl">To my amazing sister</div>
+            <div class="date">May your day be as wonderful as you are</div>
+        </header>
+        
+        <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1516487106395-f2d269d6a21c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
+            <div class="hero-overlay">
+                <i class="fas fa-birthday-cake"></i>
+            </div>
+        </div>
+        
+        <div class="message-container">
+            <p class="message">
+                Dear Sister,<br><br>
+                On your special day, I want you to know how much you mean to me. You're not just my sister but also my best friend. Your kindness, laughter, and beautiful spirit light up every room you enter.
+                <br><br>
+                May this year bring you endless joy, success in all your endeavors, and dreams that take flight. You deserve the world and more!
+            </p>
+            
+            <div class="interactive-section">
+                <h2>Make a wish!</h2>
+                <p>Tap the button to send your wish to the universe</p>
+                <button class="btn" id="wishBtn">
+                    <i class="fas fa-star"></i> Make a Wish
+                </button>
+            </div>
+            
+            <div class="interactive-section">
+                <h2>Our Memories</h2>
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="sorce\sister1.jpg" alt="Sister Photo 1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="sorce/sister2.jpg" alt="Sister Photo 2">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="sorce/sister3.jpg" alt="Sister Photo 3">
+                    
+                </div>
+                <p>Swipe to see more memories →</p>
+            </div>
+            
+            <div class="wish-form">
+                <h2>Send a Personal Wish</h2>
+                <textarea placeholder="Write your personal wish here..."></textarea>
+                <button class="btn">
+                    <i class="fas fa-paper-plane"></i> Send Wish
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        Made with <span class="heart">❤</span> for you | Happy Birthday!
+    </footer>
+
+    <!-- Image Modal -->
+    <div class="modal" id="imageModal">
+        <span class="close-btn" id="closeModal">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const wishBtn = document.getElementById('wishBtn');
+            const container = document.querySelector('.container');
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeModal = document.getElementById('closeModal');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            // Create falling hearts animation
+            function createHearts() {
+                for (let i = 0; i < 25; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.innerHTML = '<i class="fas fa-heart" style="color: #e91e63;"></i>';
+                        heart.style.position = 'fixed';
+                        heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                        heart.style.left = Math.random() * 100 + 'vw';
+                        heart.style.top = '-50px';
+                        heart.style.opacity = Math.random() * 0.5 + 0.5;
+                        heart.style.zIndex = '1000';
+                        heart.style.pointerEvents = 'none';
+                        document.body.appendChild(heart);
+                        
+                        // Animation
+                        const animationDuration = Math.random() * 3 + 3;
+                        heart.style.animation = `fall ${animationDuration}s linear forwards`;
+                        
+                        // Remove after animation
+                        setTimeout(() => {
+                            heart.remove();
+                        }, animationDuration * 1000);
+                    }, i * 200);
+                }
+            }
+            
+            // Add falling animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fall {
+                    to {
+                        transform: translateY(105vh) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Wish button event
+            wishBtn.addEventListener('click', function() {
+                createHearts();
+                
+                // Create confetti effect
+                for (let i = 0; i < 50; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    container.appendChild(confetti);
+                    
+                    // Animate confetti
+                    setTimeout(() => {
+                        confetti.style.transition = 'all 1s ease';
+                        confetti.style.opacity = '0';
+                        confetti.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 + 100}px) rotate(360deg)`;
+                    }, 10);
+                    
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 1100);
+                }
+                
+                // Play sound
+                const audio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAAABMYXZmNTguODkuMTAw');
+                audio.play().catch(e => console.log("Audio play failed:", e));
+                
+                // Show message
+                alert('Your wish has been sent to the universe! 🌠');
+            });
+            
+            // Add floating animation to gallery items
+            galleryItems.forEach((item, index) => {
+                item.style.animation = `pulse ${2 + index * 0.2}s infinite`;
+                
+                // Add click event to open modal
+                item.addEventListener('click', function() {
+                    const imgSrc = this.querySelector('img').src;
+                    modalImage.src = imgSrc;
+                    modal.style.display = 'flex';
+                });
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
